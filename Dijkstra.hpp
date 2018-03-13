@@ -15,7 +15,7 @@ class Dijkstra {
 	Point result_point;
 	double result_len;
 
-	using direction_map = std::map<Point, Point>;
+	using direction_map = std::unordered_map<Point, Point, PointHasher>;
 	direction_map route;
 
 	using Point_Characteristic = std::pair<Point, double>;
@@ -25,9 +25,11 @@ public:
 	Dijkstra(const Point& start_p, const Point& end_p, Graph3D graph);
 	bool algo();
 
-	Point_Characteristic result(){
+	Point_Characteristic result() const{
 		return {result_point, result_len};
 	}
+
+	void show_route() const;
 };
 
 #endif // _DIJKSTRA_H_

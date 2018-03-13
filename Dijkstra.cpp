@@ -52,6 +52,7 @@ bool Dijkstra::algo() {
 					if (_dist > dist + cur_dist) {
 						_dist = dist + cur_dist;
 						graph[pl].first = _dist;
+						route[pl] = current_pl;
 					}
 					queue.push({ pl, _dist });
 				}
@@ -70,4 +71,15 @@ bool Dijkstra::algo() {
 	result_len   = graph[current_pl].first;
 
 	return result_point == V9;
+}
+
+void Dijkstra::show_route() const{
+	Point V = V9;
+	while(V != V1){
+		print_point(V);
+		std::cout << '\n';
+		V = route.at(V);
+	}
+	print_point(V1);
+	std::cout << '\n';
 }

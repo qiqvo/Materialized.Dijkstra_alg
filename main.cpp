@@ -9,11 +9,11 @@
 #include "Point.hpp"
 #include "Dijkstra.hpp"
 
-int main(){
+int main(int argc, char* argv[]){
 	std::ios_base::sync_with_stdio(false);
 	std::cout << '\n';
 
-	std::string stl_file_name = "./Copernicuscrater3Xv.stl";
+	std::string stl_file_name = "./" + std::string(argv[1]); // testcube_20mm.stl
 	
 	auto info = parse_stl::parse_stl(stl_file_name);
 	
@@ -33,8 +33,8 @@ int main(){
 	// get starting point:
 	// get V1
 
-	Point V1 = (std::next(begin(graph),5)) ->first;
-	Point V9 = (std::next(begin(graph),30))->first;
+	Point V1 = (std::next(begin(graph),1)) ->first;
+	Point V9 = (std::next(begin(graph),2))->first;
 
 	print_point(V1);
 	std::cout << '\n';
@@ -45,6 +45,8 @@ int main(){
 	std::cout << "End point has been found: " << da.algo() << '\n';
 	std::cout << "distance in R3: " << Point::distance(V1, V9) << '\n';
 	std::cout << "distance over triangles: " << da.result().second << '\n';
+
+	da.show_route();
 
 	std::cout << '\n';
  	
