@@ -10,14 +10,10 @@ std::function<bool(const Dijkstra::Point_Characteristic&,
 		return pc1.second < pc2.second; };
 
 Dijkstra::Dijkstra(const Point& start_p, const Point& end_p, Graph3D graph) : 
-			graph(graph), V1(start_p), V9(end_p) {
-	// auto search = graph.find(V1);
-	auto vec = graph[V1].second;
-	if (vec.empty()) {
-		// if (!(search != graph.end())){
-		std::cout << "Graph does not contain a point ";
-		print_point(V1);
-		std::cout << " or no edges follows from it.";
+			graph(graph), V1(start_p), V9(end_p) 
+{
+	if (graph.at(V1).second.empty()) {
+		std::cout << "No edges follows from point " << V1 << '\n';
 	}
 }
 
@@ -76,10 +72,8 @@ bool Dijkstra::algo() {
 void Dijkstra::show_route() const{
 	Point V = V9;
 	while(V != V1){
-		print_point(V);
-		std::cout << '\n';
+		std::cout << V << '\n';
 		V = route.at(V);
 	}
-	print_point(V1);
-	std::cout << '\n';
+	std::cout << V1 << '\n';
 }

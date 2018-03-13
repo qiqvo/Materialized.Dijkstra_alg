@@ -10,10 +10,9 @@
 #include "Dijkstra.hpp"
 
 int main(int argc, char* argv[]){
-	std::ios_base::sync_with_stdio(false);
-	std::cout << '\n';
+	// std::ios_base::sync_with_stdio(false);
 
-	std::string stl_file_name = "./" + std::string(argv[1]); // testcube_20mm.stl
+	std::string stl_file_name = std::string(argv[1]); // testcube_20mm.stl
 	
 	auto info = parse_stl::parse_stl(stl_file_name);
 	
@@ -28,18 +27,14 @@ int main(int argc, char* argv[]){
 			static_cast<Point>(t.v2), static_cast<Point>(t.v3));
 	}
 
-	// graph.print();
-
 	// get starting point:
 	// get V1
 
 	Point V1 = (std::next(begin(graph),1)) ->first;
 	Point V9 = (std::next(begin(graph),2))->first;
 
-	print_point(V1);
-	std::cout << '\n';
-	print_point(V9);
-	std::cout << '\n';
+	std::cout << V1 << '\n';
+	std::cout << V9 << '\n';
 	
 	Dijkstra da(V1, V9, graph);
 	std::cout << "End point has been found: " << da.algo() << '\n';

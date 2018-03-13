@@ -29,12 +29,9 @@ void Graph3D::add_triangle(const Point& p1, const Point& p2, const Point& p3) {
 
 void Graph3D::print() {
 	for (auto i : *this) {
-		print_point(i.first);
-		std::cout << '\n';
+		std::cout << i.first << '\n';
 		for (auto j : i.second.second) {
-			std::cout << '\t';
-			print_point(j);
-			std::cout << '\n';
+			std::cout << '\t' << j << '\n';
 		}
 	}
 }

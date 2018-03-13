@@ -20,10 +20,6 @@ double Point::distance(const Point& p1, const Point& p2) {
 		(p1.z - p2.z) * (p1.z - p2.z));
 }
 
-void print_point(const Point& V1) {
-	std::cout << V1.x << ' ' << V1.y << ' ' << V1.z;
-}
-
 std::size_t PointHasher::operator()(const Point& p) const
 {
 	using std::size_t;
