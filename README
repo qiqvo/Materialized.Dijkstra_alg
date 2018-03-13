@@ -1,0 +1,12 @@
+Thanks to dillonhuff/stl_parser. [https://github.com/dillonhuff/stl_parser]
+
+Compile the program (with Makefile for example).
+
+Makefile usage:
+1) make sure g++-6
+2) in dir of the project execute: `make`
+3) use `make clean` or `make distclean` to remove all .o and main files.
+
+To run: `./main name_of_stl_file.stl $(some numbers)`
+Here $(some numbers) stands for some Points in 3D space (3 numbers for each point). At least 6 numbers required (2 points -- start, end).
+You can also type in more end points.
