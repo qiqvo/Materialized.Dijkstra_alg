@@ -14,7 +14,6 @@ $(appname): $(OBJS)
 	$(CXX) -o main $(OBJS)
 
 $(OBJS): $(SRCS)
-# parse_stl.o: $(parse_stl_DIR)/parse_stl.cpp
 
 clean:
 	$(RM) $(OBJS)

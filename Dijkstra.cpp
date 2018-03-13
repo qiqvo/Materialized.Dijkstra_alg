@@ -2,6 +2,13 @@
 #include <unordered_set>
 #include <queue>
 
+
+std::function<bool(const Dijkstra::Point_Characteristic&,
+		const Dijkstra::Point_Characteristic& )> 
+	Dijkstra::Comparator = 
+			[](Dijkstra::Point_Characteristic pc1, Dijkstra::Point_Characteristic pc2) {
+		return pc1.second < pc2.second; };
+
 Dijkstra::Dijkstra(const Point& start_p, const Point& end_p, Graph3D graph) : 
 			graph(graph), V1(start_p), V9(end_p) {
 	// auto search = graph.find(V1);
@@ -14,18 +21,21 @@ Dijkstra::Dijkstra(const Point& start_p, const Point& end_p, Graph3D graph) :
 	}
 }
 
-double Dijkstra::algo() {
+bool Dijkstra::algo() {
 	Point current_pl = V1;
 	double cur_dist = 0;
 	std::pair<double, std::vector<Point>> tmp_var;
-	int iter_count = 0; int max_iter_count = 8;
+	
+	std::size_t iter_count = 0; 
+	std::size_t max_iter_count = graph.size();
 	
 	std::unordered_set<Point, PointHasher> checked;
 
-	auto Comparator = [](Dijkstra::Point_Characteristic pc1, Point_Characteristic pc2) {
-		return pc1.second < pc2.second; };
+	// queue of points to be visited 
+	// with static Comparator 
+	// Comparator may be optimized for A* algo
 	std::priority_queue<Point_Characteristic, std::deque<Point_Characteristic>, 
-		decltype(Comparator)> queue(Comparator);
+		decltype(Dijkstra::Comparator)> queue(Dijkstra::Comparator);
 
 	while (current_pl != V9 && iter_count < max_iter_count
 				&& cur_dist != Graph3D::INFTY) 
@@ -56,5 +66,8 @@ double Dijkstra::algo() {
 		++iter_count;
 	}
 
-	return graph[current_pl].first;
+	result_point = current_pl;
+	result_len   = graph[current_pl].first;
+
+	return result_point == V9;
 }

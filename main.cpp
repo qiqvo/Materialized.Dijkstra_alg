@@ -42,7 +42,10 @@ int main(){
 	std::cout << '\n';
 	
 	Dijkstra da(V1, V9, graph);
-	std::cout << da.algo() << '\n';
+	std::cout << "End point has been found: " << da.algo() << '\n';
+	std::cout << "distance in R3: " << Point::distance(V1, V9) << '\n';
+	std::cout << "distance over triangles: " << da.result().second << '\n';
+
 	std::cout << '\n';
  	
  	// graph.print();

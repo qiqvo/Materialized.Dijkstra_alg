@@ -5,18 +5,29 @@
 #include "Point.hpp"
 
 #include <functional>
+#include <map>
 
 class Dijkstra {
 	// a copy of graph
 	Graph3D graph;
 	Point V1, V9;
 
+	Point result_point;
+	double result_len;
+
+	using direction_map = std::map<Point, Point>;
+	direction_map route;
+
 	using Point_Characteristic = std::pair<Point, double>;
 	static std::function<bool(const Point_Characteristic&,
 			const Point_Characteristic& )> Comparator;
 public:
 	Dijkstra(const Point& start_p, const Point& end_p, Graph3D graph);
-	double algo();
+	bool algo();
+
+	Point_Characteristic result(){
+		return {result_point, result_len};
+	}
 };
 
 #endif // _DIJKSTRA_H_
