@@ -6,13 +6,7 @@ void Graph3D::PlaceEdge(const Point& p1, const Point& p2) {
 	auto search = find(p1);
 	if (search != end()) {
 		auto found_vec = search->second.second;
-		bool found_point = false;
-		for (std::size_t i = 0; i < found_vec.size(); ++i) {
-			if (found_vec[i] == p2) {
-				found_point = true; break;
-			}
-		}
-		if (!found_point){
+		if (std::find(std::begin(found_vec), std::end(found_vec), p2) == std::end(found_vec)) {
 			search->second.second.push_back(p2);
 		}
 	}
