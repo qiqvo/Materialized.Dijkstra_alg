@@ -47,18 +47,20 @@ bool Dijkstra::algo() {
 				&& cur_dist != Graph3D::INFTY) 
 	{
 		if (checked.find(current_pl) == checked.end()) {
-			tmp_var = graph[current_pl];
+			tmp_var = graph.at(current_pl);
 			if (iter_count != 0) {
 				cur_dist = tmp_var.first;
 			}
 			for (auto& pl : tmp_var.second) {
 				if (checked.find(pl) == checked.end()) {
-					auto dist = Point::distance(V1, pl);
-					auto _dist = graph[pl].first;
+					auto dist = Point::distance(current_pl, pl);
+					auto _dist = graph.at(pl).first;
 					if (_dist > dist + cur_dist) {
 						_dist = dist + cur_dist;
-						graph[pl].first = _dist;
+						graph.at(pl).first = _dist;
 						route[pl] = current_pl;
+						// std::cout << "Basing at " << current_pl << " optimized dist to point " << 
+						// 				pl << " is " << _dist << '\n'; 
 					}
 					queue.push({ pl, _dist });
 				}
@@ -74,7 +76,7 @@ bool Dijkstra::algo() {
 	}
 
 	result_point = current_pl;
-	result_len   = graph[current_pl].first;
+	result_len   = graph.at(current_pl).first;
 
 	end_point_found = (result_point == V9);
 
