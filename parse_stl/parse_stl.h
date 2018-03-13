@@ -7,12 +7,12 @@
 namespace parse_stl {
 
   struct point {
-    double x;
-    double y;
-    double z;
+    float x;
+    float y;
+    float z;
 
     point() : x(0), y(0), z(0) {}
-    point(double xp, double yp, double zp) : x(xp), y(yp), z(zp) {}
+    point(float xp, float yp, float zp) : x(xp), y(yp), z(zp) {}
   };
 
   struct triangle {

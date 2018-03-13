@@ -10,17 +10,27 @@ std::function<bool(const Dijkstra::Point_Characteristic&,
 		return pc1.second < pc2.second; };
 
 Dijkstra::Dijkstra(const Point& start_p, const Point& end_p, Graph3D graph) : 
-			graph(graph), V1(start_p), V9(end_p) 
+			graph(graph), V1(start_p), V9(end_p), end_point_found(false), 
+			V1_bad(false), V9_bad(false) 
 {
 	if (graph.at(V1).second.empty()) {
-		std::cout << "No edges follows from point " << V1 << '\n';
+		std::cout << "No edges follows from start-point " << V1 << '\n';
+		V1_bad = true;
+	}
+	else if (graph.at(V9).second.empty()) {
+		std::cout << "No edges follows from end-point " << V9 << '\n';
+		V9_bad = true;
 	}
 }
 
 bool Dijkstra::algo() {
+	if (V1_bad || V9_bad){
+		return false;
+	}
+
 	Point current_pl = V1;
-	double cur_dist = 0;
-	std::pair<double, std::vector<Point>> tmp_var;
+	float cur_dist = 0;
+	std::pair<float, std::vector<Point>> tmp_var;
 	
 	std::size_t iter_count = 0; 
 	std::size_t max_iter_count = graph.size();
@@ -66,14 +76,18 @@ bool Dijkstra::algo() {
 	result_point = current_pl;
 	result_len   = graph[current_pl].first;
 
-	return result_point == V9;
+	end_point_found = (result_point == V9);
+
+	return end_point_found;
 }
 
 void Dijkstra::show_route() const{
-	Point V = V9;
-	while(V != V1){
-		std::cout << V << '\n';
-		V = route.at(V);
+	if (!(V1_bad || V9_bad || !end_point_found)){
+		Point V = V9;
+		while(V != V1){
+			std::cout << V << '\n';
+			V = route.at(V);
+		}
+		std::cout << V1 << '\n';
 	}
-	std::cout << V1 << '\n';
 }

@@ -1,6 +1,6 @@
 #include "Graph3D.hpp"
 
-const double Graph3D::INFTY = 20E10;
+const float Graph3D::INFTY = 20E10;
 
 void Graph3D::PlaceEdge(const Point& p1, const Point& p2) {
 	auto search = find(p1);

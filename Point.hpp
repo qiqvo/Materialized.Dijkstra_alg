@@ -16,7 +16,7 @@ struct PointHasher {
 };
 
 struct Point : parse_stl::point {
-	Point(double xp = 0, double yp = 0, double zp = 0) : parse_stl::point(xp, yp, zp) {}
+	Point(float xp = 0, float yp = 0, float zp = 0) : parse_stl::point(xp, yp, zp) {}
 	Point(parse_stl::point p) : Point(p.x, p.y, p.z) {}
 
 	bool operator==(const Point& p2) const;
@@ -24,9 +24,9 @@ struct Point : parse_stl::point {
 
 	friend std::ostream & operator<<(std::ostream& os, const Point& p);
 
-	static double distance(const Point& p1, const Point& p2);
+	static float distance(const Point& p1, const Point& p2);
 
-	static const double EPS;
+	static const float EPS;
 };
 
 #endif // _POINT_H_

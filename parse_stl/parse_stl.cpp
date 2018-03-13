@@ -22,17 +22,17 @@ namespace parse_stl {
     return out;
   }
   
-  double parse_double(std::ifstream& s) {
+  float parse_float(std::ifstream& s) {
     char f_buf[sizeof(float)];
     s.read(f_buf, 4);
     float* fptr = (float*) f_buf;
-    return double(*fptr);
+    return float(*fptr);
   }
 
   point parse_point(std::ifstream& s) {
-    double x = parse_double(s);
-    double y = parse_double(s);
-    double z = parse_double(s);
+    float x = parse_float(s);
+    float y = parse_float(s);
+    float z = parse_float(s);
     return point(x, y, z);
   }
 

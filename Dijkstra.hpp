@@ -13,12 +13,13 @@ class Dijkstra {
 	Point V1, V9;
 
 	Point result_point;
-	double result_len;
+	float result_len;
+	bool end_point_found, V1_bad, V9_bad; 
 
 	using direction_map = std::unordered_map<Point, Point, PointHasher>;
 	direction_map route;
 
-	using Point_Characteristic = std::pair<Point, double>;
+	using Point_Characteristic = std::pair<Point, float>;
 	static std::function<bool(const Point_Characteristic&,
 			const Point_Characteristic& )> Comparator;
 public:
