@@ -2,25 +2,20 @@
 #define _POINT_H_
 
 #include <iostream>
+#include <ostream>
 #include <utility>
 #include <algorithm>
 #include <iterator>
 #include <initializer_list>
 #include "parse_stl/parse_stl.h"
 
-// check num
-// add limits 
-
 struct Point;
-
-// using PointLen = std::pair<Point, double>;
 
 struct PointHasher {
 	std::size_t operator()(const Point& p) const;
 };
 
 void print_point(const Point& V1);
-// void print_point(const PointLen& V1);
 
 struct Point : parse_stl::point {
 	Point(double xp = 0, double yp = 0, double zp = 0) : parse_stl::point(xp, yp, zp) {}
@@ -28,6 +23,8 @@ struct Point : parse_stl::point {
 
 	bool operator==(const Point& p2) const;
 	bool operator!=(const Point& p2) const;
+
+	friend std::ostream & operator<<(std::ostream& os, const Point& p);
 
 	static double distance(const Point& p1, const Point& p2);
 
