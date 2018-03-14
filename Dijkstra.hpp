@@ -20,16 +20,19 @@ class Dijkstra {
 	direction_map route;
 
 	using Point_Characteristic = std::pair<Point, float>;
+	// used in priority queue
 	static std::function<bool(const Point_Characteristic&,
 			const Point_Characteristic& )> Comparator;
 public:
 	Dijkstra(const Point& start_p, const Point& end_p, Graph3D graph);
 	bool algo();
 
-	Point_Characteristic result() const{
+	std::pair<Point, float> result() const{
 		return {result_point, result_len};
 	}
-
+	
+	// prints point by point how to get to an V9 point backwards
+	// ie from the point V9 up to the V1
 	void show_route() const;
 };
 

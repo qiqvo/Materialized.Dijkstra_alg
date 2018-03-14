@@ -1,7 +1,7 @@
 #include "Point.hpp"
 #include <cmath>
 
-const float Point::EPS = 10e-6;
+const float Point::EPS = (float)10e-6;
 
 bool Point::operator==(const Point& p2) const {
 	return fabs(x - p2.x) < EPS && fabs(y - p2.y) < EPS && fabs(z - p2.z) < EPS;
@@ -24,7 +24,6 @@ std::size_t PointHasher::operator()(const Point& p) const
 {
 	using std::size_t;
 	using std::hash;
-	using std::string;
 
 	return ((hash<float>()(p.x)
 		^ (hash<float>()(p.y) << 1)) >> 1)

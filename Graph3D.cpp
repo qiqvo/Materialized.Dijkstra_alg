@@ -1,6 +1,7 @@
 #include "Graph3D.hpp"
+#include <limits>
 
-const float Graph3D::INFTY = 20E10;
+const float Graph3D::INFTY = std::numeric_limits<float>::max();
 
 void Graph3D::PlaceEdge(const Point& p1, const Point& p2) {
 	auto search = find(p1);
