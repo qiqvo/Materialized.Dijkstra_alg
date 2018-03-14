@@ -5,17 +5,17 @@
 #include "Point.hpp"
 
 #include <functional>
+#include <unordered_set>
 #include <map>
 #include <ostream>
 
 class Dijkstra {
 	// a copy of graph
 	Graph3D graph;
-	Point V1, V9;
+	Point V1;
+	std::unordered_set<Point, PointHasher> V_end;
 
-	Point result_point;
-	float result_len;
-	bool end_point_found, V1_bad, V9_bad; 
+	bool end_point_found, V1_bad; 
 
 	using direction_map = std::unordered_map<Point, Point, PointHasher>;
 	direction_map route;
@@ -25,16 +25,12 @@ class Dijkstra {
 	static std::function<bool(const Point_Characteristic&,
 			const Point_Characteristic& )> Comparator;
 public:
-	Dijkstra(const Point& start_p, const Point& end_p, Graph3D graph);
+	Dijkstra(const Point& , const std::vector<Point>& , Graph3D );
 	bool algo();
-
-	std::pair<Point, float> result() const{
-		return {result_point, result_len};
-	}
 	
 	// prints point by point how to get to an V9 point backwards
 	// ie from the point V9 up to the V1
-	void show_route(std::ostream& os = std::cout) const;
+	void show_route(const Point&, std::ostream& os = std::cout) const;
 };
 
 #endif // _DIJKSTRA_H_

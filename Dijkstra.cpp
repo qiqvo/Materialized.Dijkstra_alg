@@ -1,5 +1,4 @@
 #include "Dijkstra.hpp"
-#include <unordered_set>
 #include <queue>
 
 
@@ -9,22 +8,27 @@ std::function<bool(const Dijkstra::Point_Characteristic&,
 			[](Dijkstra::Point_Characteristic pc1, Dijkstra::Point_Characteristic pc2) {
 		return pc1.second < pc2.second; };
 
-Dijkstra::Dijkstra(const Point& start_p, const Point& end_p, Graph3D graph) : 
-			graph(graph), V1(start_p), V9(end_p), end_point_found(false), 
-			V1_bad(false), V9_bad(false) 
+Dijkstra::Dijkstra(const Point& start_p, const std::vector<Point>& end_ps, Graph3D graph) : 
+			graph(graph), V1(start_p), end_point_found(false), 
+			V1_bad(false) 
 {
 	if (graph.at(V1).second.empty()) {
 		std::cout << "No edges follows from start-point " << V1 << '\n';
 		V1_bad = true;
 	}
-	else if (graph.at(V9).second.empty()) {
-		std::cout << "No edges follows from end-point " << V9 << '\n';
-		V9_bad = true;
+	for (const auto& p : end_ps) {
+		if (!graph.at(p).second.empty()) {
+			V_end.insert(p);
+		}
+		else {
+			std::cout << "No edges follows from end-point " << p << '\n';
+			std::cout << "So skip it." << '\n';
+		}
 	}
 }
 
 bool Dijkstra::algo() {
-	if (V1_bad || V9_bad){
+	if (V1_bad || V_end.empty()){
 		return false;
 	}
 
@@ -43,9 +47,17 @@ bool Dijkstra::algo() {
 	std::priority_queue<Point_Characteristic, std::deque<Point_Characteristic>, 
 		decltype(Dijkstra::Comparator)> queue(Dijkstra::Comparator);
 
-	while (current_pl != V9 && iter_count < max_iter_count
+	while (iter_count < max_iter_count
 				&& cur_dist != Graph3D::INFTY) 
 	{
+		auto end_elem = V_end.find(current_pl);
+		if (end_elem != V_end.end()) {
+			V_end.erase(end_elem);
+			if (V_end.empty()) {
+				end_point_found = true;
+				break;
+			}
+		}
 		if (checked.find(current_pl) == checked.end()) {
 			tmp_var = graph.at(current_pl);
 			if (iter_count != 0) {
@@ -59,8 +71,6 @@ bool Dijkstra::algo() {
 						_dist = dist + cur_dist;
 						graph.at(pl).first = _dist;
 						route[pl] = current_pl;
-						// std::cout << "Basing at " << current_pl << " optimized dist to point " << 
-						// 				pl << " is " << _dist << '\n'; 
 					}
 					queue.push({ pl, _dist });
 				}
@@ -75,16 +85,11 @@ bool Dijkstra::algo() {
 		++iter_count;
 	}
 
-	result_point = current_pl;
-	result_len   = graph.at(current_pl).first;
-
-	end_point_found = (result_point == V9);
-
 	return end_point_found;
 }
 
-void Dijkstra::show_route(std::ostream& os) const{
-	if (!(V1_bad || V9_bad || !end_point_found)){
+void Dijkstra::show_route(const Point& V9, std::ostream& os) const{
+	if (!(V1_bad || !end_point_found)){
 		Point V = V9;
 		while(V != V1){
 			os << V << '\n';
