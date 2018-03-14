@@ -83,13 +83,13 @@ bool Dijkstra::algo() {
 	return end_point_found;
 }
 
-void Dijkstra::show_route() const{
+void Dijkstra::show_route(std::ostream& os) const{
 	if (!(V1_bad || V9_bad || !end_point_found)){
 		Point V = V9;
 		while(V != V1){
-			std::cout << V << '\n';
+			os << V << '\n';
 			V = route.at(V);
 		}
-		std::cout << V1 << '\n';
+		os << V1 << '\n';
 	}
 }

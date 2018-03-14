@@ -6,6 +6,7 @@
 
 #include <functional>
 #include <map>
+#include <ostream>
 
 class Dijkstra {
 	// a copy of graph
@@ -33,7 +34,7 @@ public:
 	
 	// prints point by point how to get to an V9 point backwards
 	// ie from the point V9 up to the V1
-	void show_route() const;
+	void show_route(std::ostream& os = std::cout) const;
 };
 
 #endif // _DIJKSTRA_H_
