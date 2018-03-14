@@ -47,8 +47,9 @@ bool Dijkstra::algo() {
 	std::priority_queue<Point_Characteristic, std::deque<Point_Characteristic>, 
 		decltype(Dijkstra::Comparator)> queue(Dijkstra::Comparator);
 
-	while (iter_count < max_iter_count
-				&& cur_dist != Graph3D::INFTY) 
+
+
+	while (iter_count < max_iter_count) 
 	{
 		auto end_elem = V_end.find(current_pl);
 		if (end_elem != V_end.end()) {

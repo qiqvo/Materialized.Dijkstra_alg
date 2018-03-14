@@ -23,11 +23,11 @@ Point parse_point(char buf1[], char buf2[], char buf3[]){
 // So that py script can plot them
 // #define PY_Visual
 
-#define DEBUG
+// #define DEBUG
 
 int main(int argc, char* argv[]) {
-	std::string stl_file_name = "./examples/testcube_20mm.stl";
-	// stl_file_name += std::string(argv[1]); // ./examples/testcube_20mm.stl ./examples/Helm.stl
+	std::string stl_file_name = ""; // "./examples/testcube_20mm.stl";
+	stl_file_name += std::string(argv[1]);
 	std::vector<Point> V_end;
 	Point V1;
 
@@ -45,9 +45,6 @@ int main(int argc, char* argv[]) {
 	for (const auto& t : info.triangles) {
 		graph.add_triangle(t.v1, t.v2, t.v3);
 	}
-
-	// V1 = (std::next(begin(graph), 38))->first;
-	// V_end.push_back((std::next(begin(graph), 72))->first);
 
 #ifdef DEBUG
 	// V1 = (std::next(begin(graph), 38))->first;
