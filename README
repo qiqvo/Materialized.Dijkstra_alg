@@ -14,4 +14,4 @@ You can also type in more end points.
 
 For example the following run statement should work fine:
 `./main ./examples/testcube_20mm.stl 10 10 10 -10 -10 -10 10 -10 -10`
-								    |start po| |first end| |second end point|    
+                                    |start po| |first end| |second end point|

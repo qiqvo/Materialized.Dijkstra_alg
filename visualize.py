@@ -20,8 +20,8 @@ def plot_points_file(file_name, c='b'):
 def main():
 	plot_points_file('points')
 
-	plot_points_file('path', c='r')
-	# ax.scatter(xs, ys, zs, c='r',marker='^')
+	plot_points_file('path1', c='r')
+	# plot_points_file('path2', c='r')
 	plt.show()
 
 if __name__ == '__main__':
