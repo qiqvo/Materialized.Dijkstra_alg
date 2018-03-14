@@ -1,6 +1,7 @@
 Thanks to dillonhuff/stl_parser. [https://github.com/dillonhuff/stl_parser]
 
 Compile the program (with Makefile for example).
+Also tested to build without errors in MVS 2017.
 
 Makefile usage:
 1) make sure g++-6
@@ -10,3 +11,7 @@ Makefile usage:
 To run: `./main name_of_stl_file.stl $(some numbers)`
 Here $(some numbers) stands for some Points in 3D space (3 numbers for each point). At least 6 numbers required (2 points -- start, end).
 You can also type in more end points.
+
+For example the following run statement should work fine:
+`./main ./examples/testcube_20mm.stl 10 10 10 -10 -10 -10 10 -10 -10`
+								    |start po| |first end| |second end point|    
