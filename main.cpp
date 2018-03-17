@@ -21,9 +21,9 @@ Point parse_point(char buf1[], char buf2[], char buf3[]){
 
 // to create file with the points of an obj
 // So that py script can plot them
-// #define PY_Visual
+#define PY_Visual
 
-// #define DEBUG
+#define DEBUG
 
 int main(int argc, char* argv[]) {
 	std::string stl_file_name = ""; // "./examples/testcube_20mm.stl";
@@ -47,10 +47,19 @@ int main(int argc, char* argv[]) {
 	}
 
 #ifdef DEBUG
-	// V1 = (std::next(begin(graph), 38))->first;
-	// V_end.push_back((std::next(begin(graph), 72))->first);
-	V1 = Point{10, 10, 10};
-	V_end.push_back(Point{-10, -10, -10});
+	V1 = (std::next(begin(graph), 10))->first;
+	// V_end.push_back(graph.at(V1).second.at(2));
+	V_end.push_back((std::next(begin(graph), 20))->first);
+	V_end.push_back((std::next(begin(graph), 48))->first);
+	V_end.push_back((std::next(begin(graph), 139))->first);
+	V_end.push_back((std::next(begin(graph), 33))->first);
+	V_end.push_back((std::next(begin(graph), 324))->first);
+
+	// V1 = Point{10, 10, 10};
+	// V_end.push_back(Point{-10, -10, -10});
+
+	std::cout << "start at " << V1 << '\n';
+	std::cout << "end at " << V_end.at(0) << '\n';
 #endif
 	
 	try{

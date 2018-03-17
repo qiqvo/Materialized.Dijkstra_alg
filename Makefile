@@ -19,4 +19,6 @@ clean:
 	$(RM) $(OBJS)
 
 distclean: clean
-	$(RM) $(appname)
+	$(RM) $(appname) 
+	$(RM) path[0-9]
+	$(RM) points

@@ -5,6 +5,11 @@
 #include <list>
 
 // top is least
+
+/*
+	Container should be equipped with bi-way iterator
+	and erase, emplace operations
+*/
 template <class T, 
     class Container = std::list<T>,
     class Compare = std::less<typename Container::value_type>,

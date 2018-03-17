@@ -39,8 +39,6 @@ bool Dijkstra::algo() {
 	std::unordered_set<Point, PointHasher> checked;
 
 	// queue of points to be visited 
-	// with static Comparator 
-	// Comparator may be optimized for A* algo
 	UpdatePriorityQueue<Point_Characteristic> queue;
 
 	while (iter_count < max_iter_count) 
