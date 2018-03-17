@@ -20,10 +20,19 @@ class Dijkstra {
 	using direction_map = std::unordered_map<Point, Point, PointHasher>;
 	direction_map route;
 
-	using Point_Characteristic = std::pair<Point, float>;
-	// used in priority queue
-	static std::function<bool(const Point_Characteristic&,
-			const Point_Characteristic& )> Comparator;
+	struct Point_Characteristic{
+		Point p;
+		float ch;
+
+		bool operator<(const Point_Characteristic& pc2) const{
+			return ch < pc2.ch;
+		}
+
+		bool operator==(const Point_Characteristic& pc2) const{
+			return p == pc2.p;
+		}
+	};
+
 public:
 	Dijkstra(const Point& , const std::vector<Point>& , Graph3D );
 	bool algo();
