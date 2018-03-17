@@ -1,12 +1,9 @@
 #include "Dijkstra.hpp"
 #include <queue>
+#include <functional>
+#include <vector>
 
-
-std::function<bool(const Dijkstra::Point_Characteristic&,
-		const Dijkstra::Point_Characteristic& )> 
-	Dijkstra::Comparator = 
-			[](Dijkstra::Point_Characteristic pc1, Dijkstra::Point_Characteristic pc2) {
-		return pc1.second < pc2.second; };
+#include "UpdatePriorityQueue.hpp"
 
 Dijkstra::Dijkstra(const Point& start_p, const std::vector<Point>& end_ps, Graph3D graph) : 
 			graph(graph), V1(start_p), end_point_found(false), 
@@ -34,7 +31,7 @@ bool Dijkstra::algo() {
 
 	Point current_pl = V1;
 	float cur_dist = 0;
-	std::pair<float, std::vector<Point>> tmp_var;
+	std::vector<Point> neighbour_points;
 	
 	std::size_t iter_count = 0; 
 	std::size_t max_iter_count = graph.size();
@@ -44,10 +41,7 @@ bool Dijkstra::algo() {
 	// queue of points to be visited 
 	// with static Comparator 
 	// Comparator may be optimized for A* algo
-	std::priority_queue<Point_Characteristic, std::deque<Point_Characteristic>, 
-		decltype(Dijkstra::Comparator)> queue(Dijkstra::Comparator);
-
-
+	UpdatePriorityQueue<Point_Characteristic> queue;
 
 	while (iter_count < max_iter_count) 
 	{
@@ -60,30 +54,30 @@ bool Dijkstra::algo() {
 			}
 		}
 		if (checked.find(current_pl) == checked.end()) {
-			tmp_var = graph.at(current_pl);
-			if (iter_count != 0) {
-				cur_dist = tmp_var.first;
-			}
-			for (auto& pl : tmp_var.second) {
+			neighbour_points = graph.at(current_pl).second;
+			for (const auto& pl : neighbour_points) {
 				if (checked.find(pl) == checked.end()) {
 					auto dist = Point::distance(current_pl, pl);
 					auto _dist = graph.at(pl).first;
 					if (_dist > dist + cur_dist) {
 						_dist = dist + cur_dist;
-						graph.at(pl).first = _dist;
+						graph[pl].first = _dist;
 						route[pl] = current_pl;
+						queue.push({ pl, _dist });
 					}
-					queue.push({ pl, _dist });
 				}
 			}
 			checked.insert(current_pl);
+			++iter_count;
 		}
-		current_pl = (queue.top().first);
+
 		if (queue.empty()) {
 			break;
 		}
+
+		current_pl = queue.top().p;
+		cur_dist = queue.top().ch;
 		queue.pop();
-		++iter_count;
 	}
 
 	return end_point_found;
