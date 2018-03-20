@@ -34,7 +34,7 @@ class Dijkstra {
 	};
 
 public:
-	Dijkstra(const Point& , const std::vector<Point>& , Graph3D );
+	Dijkstra(Graph3D, const Point& , const std::vector<Point>& );
 	bool algo();
 	
 	// prints point by point how to get to an V9 point backwards

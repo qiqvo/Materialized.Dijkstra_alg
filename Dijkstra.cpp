@@ -5,7 +5,8 @@
 
 #include "UpdatePriorityQueue.hpp"
 
-Dijkstra::Dijkstra(const Point& start_p, const std::vector<Point>& end_ps, Graph3D graph) : 
+Dijkstra::Dijkstra(Graph3D graph, const Point& start_p, 
+			const std::vector<Point>& end_ps) : 
 			graph(graph), V1(start_p), end_point_found(false), 
 			V1_bad(false) 
 {
@@ -13,12 +14,12 @@ Dijkstra::Dijkstra(const Point& start_p, const std::vector<Point>& end_ps, Graph
 		std::cout << "No edges follows from start-point " << V1 << '\n';
 		V1_bad = true;
 	}
-	for (const auto& p : end_ps) {
-		if (!graph.at(p).second.empty()) {
-			V_end.insert(p);
+	for (auto it = std::begin(end_ps); it != std::end(end_ps); ++it) {
+		if (!graph.at(*it).second.empty()) {
+			V_end.insert(*it);
 		}
 		else {
-			std::cout << "No edges follows from end-point " << p << '\n';
+			std::cout << "No edges follows from end-point " << *it << '\n';
 			std::cout << "So skip it." << '\n';
 		}
 	}
@@ -82,7 +83,7 @@ bool Dijkstra::algo() {
 }
 
 void Dijkstra::show_route(const Point& V9, std::ostream& os) const{
-	if (!(V1_bad || !end_point_found)){
+	if (!V1_bad && V_end.find(V9) != V_end.end()){
 		Point V = V9;
 		while(V != V1){
 			os << V << '\n';
