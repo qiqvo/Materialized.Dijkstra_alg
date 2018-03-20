@@ -61,18 +61,18 @@ public:
 		}
 	}
 
-	auto top() const {
+	T top() const {
 		return *(std::begin(elems));
 	}
 
-	auto pop() {
+	void pop() {
 		return elems.pop_front();
 	}
 
-	auto empty(){
+	bool empty(){
 		return elems.empty();
 	}
-	auto size(){
+	size_t size(){
 		return elems.size();
 	}
 };
