@@ -40,6 +40,10 @@ public:
 	// prints point by point how to get to an V9 point backwards
 	// ie from the point V9 up to the V1
 	void show_route(const Point&, std::ostream& os = std::cout) const;
+
+	float distance(const Point& p) const{
+		return graph.at(p).first;
+	}
 };
 
 #endif // _DIJKSTRA_H_

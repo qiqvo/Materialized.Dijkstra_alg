@@ -22,7 +22,7 @@ void Graph3D::add_triangle(const Point& p1, const Point& p2, const Point& p3) {
 	PlaceEdge(p2, p3); PlaceEdge(p3, p2);
 }
 
-void Graph3D::print() {
+void Graph3D::print() const {
 	for (auto i : *this) {
 		std::cout << i.first << '\n';
 		for (auto j : i.second.second) {

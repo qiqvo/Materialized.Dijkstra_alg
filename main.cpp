@@ -84,11 +84,15 @@ int main(int argc, char* argv[]) {
 			std::cout << "route has been found for every point, "
 					"with non-empty edge's set, inputed.\n";
 			
+			std::cout << "From point (" << V1 << ")\n";
 			/* print out the route from V_end to V1 in different files */
 			std::string path_file_name = "path";
 			for (std::size_t i = 0; i < V_end.size(); ++i) {
 				std::ofstream path_file(path_file_name + std::to_string(i));
 				dij.show_route(V_end[i], path_file);
+				std::cout << "Distance to point (" << V_end[i] << ") is \t" << 
+					dij.distance(V_end[i]) << '\n';
+				std::cout << "Distance in R3 : " << Point::distance(V1, V_end[i]) << "\n\n";
 				path_file.close();
 			}
 		}

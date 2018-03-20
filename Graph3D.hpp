@@ -15,17 +15,19 @@
 
 	At the beginning all length are INFTY
 */
-class Graph3D : public std::unordered_map<Point, std::pair<float, std::vector<Point>>, PointHasher> {
+class Graph3D : public std::unordered_map<Point, 
+		std::pair<float, std::vector<Point>>, PointHasher> {
 private:
 	void PlaceEdge(const Point& p1, const Point& p2);
 public:
-	Graph3D() : std::unordered_map<Point, std::pair<float, std::vector<Point>>, PointHasher>() {};
+	Graph3D() : std::unordered_map<Point, 
+			std::pair<float, std::vector<Point>>, PointHasher>() {};
 
 	void add_triangle(const Point& p1, const Point& p2, const Point& p3);
 
-	void print();
+	void print() const ;
 
-	static const float INFTY;
+	static const float INFTY; // = std::numeric_limits<float>::max();
 };
 
 #endif // _GRAPH3D_H_

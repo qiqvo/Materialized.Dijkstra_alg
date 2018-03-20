@@ -8,10 +8,8 @@ Makefile usage:
 2) in dir of the project execute: `make`
 3) use `make clean` or `make distclean` to remove all .o and main files.
 
-To run: `./main name_of_stl_file.stl $(some numbers)`
-Here $(some numbers) stands for some Points in 3D space (3 numbers for each point). At least 6 numbers required (2 points -- start, end).
-You can also type in more end points.
+To run: `./main name_of_stl_file.stl`
 
-For example the following run statement should work fine:
-`./main ./examples/testcube_20mm.stl 10 10 10 -10 -10 -10 10 -10 -10`
-                                    |start po| |first end| |second end point|
+The best way to add more points to check the distance:
+	`V_end.push_back((std::next(std::begin(graph), $(SOME_NUMBER)))->first);`
+Just look at main:56:5 
