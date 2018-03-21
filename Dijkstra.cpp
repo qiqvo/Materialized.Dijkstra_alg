@@ -83,7 +83,9 @@ bool Dijkstra::algo() {
 }
 
 void Dijkstra::show_route(const Point& V9, std::ostream& os) const{
-	if (!V1_bad && V_end.find(V9) != V_end.end()){
+	if (!V1_bad && V_end.find(V9) == V_end.end() && 
+			graph.at(V9).first != Graph3D::INFTY)
+	{
 		Point V = V9;
 		while(V != V1){
 			os << V << '\n';
